@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 #builtin python lib logging
 import logging
 
+#logs name directory created
 logDirectory='logs'
 os.makedirs(logDirectory,exist_ok=True)
 
