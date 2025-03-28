@@ -50,19 +50,22 @@ def preprocessData(df:pd.DataFrame)->pd.DataFrame:
         logger.error('Unexpected error ',e)
         raise
 
-def saveData(trainData:pd.DataFrame,testData:pd.DataFrame,dataPath:str)->None:
+def saveData(trainData: pd.DataFrame, testData: pd.DataFrame, dataPath: str) -> None:
     '''save train and test data'''
     try:
-        rawDataPath=os.path.join(dataPath,'Raw')
-        os.makedirs(rawDataPath,exist_ok=True)
-        trainData.to_csv(os.path.join(rawDataPath,'trainData.csv'),index=False)
-        testData.to_csv(os.path.join(rawDataPath,'testData.csv'),index=False)
+        rawDataPath = os.path.abspath(os.path.join(dataPath, 'raw'))
+        os.makedirs(rawDataPath, exist_ok=True)
+        trainData.to_csv(os.path.join(rawDataPath, 'trainData.csv'), index=False)
+        testData.to_csv(os.path.join(rawDataPath, 'testData.csv'), index=False)
         logger.debug(f'train and test data saved to {rawDataPath}')
     except Exception as e:
-        logger.error('unexpected error ',e)
+        logger.error('Unexpected error ', exc_info=True)  # Improved logging
         raise
 
+
+
 def main():
+    
     try:
         test_size=0.2
         dataPath='https://raw.githubusercontent.com/aliyan16/Datasets/refs/heads/main/spam.csv'
@@ -70,6 +73,7 @@ def main():
         finalDf=preprocessData(df=df)
         trainData,testData=train_test_split(finalDf,test_size=test_size,random_state=42)
         saveData(trainData=trainData,testData=testData,dataPath='./data')
+        logger.debug(f'dataingestion executed')
     except Exception as e:
         logger.error('Unexpected error ',e)
         print(e)

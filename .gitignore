@@ -1,6 +1,4 @@
-data
-models
-reports
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -9,6 +7,10 @@ __pycache__/
 
 # C extensions
 *.so
+
+data
+models
+reports
 
 # Distribution / packaging
 .Python
