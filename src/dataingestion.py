@@ -33,7 +33,7 @@ def loadData(dataUrl:str)->pd.DataFrame:
     '''load data from csv file'''
     try:
         df=pd.read_csv(dataUrl)
-        logger.debug('Data Loaded from ',dataUrl)
+        logger.debug(f'Data Loaded from {dataUrl}')
         return df
     except Exception as e:
         logger.error('Unexpected error ',e)
@@ -57,7 +57,7 @@ def saveData(trainData:pd.DataFrame,testData:pd.DataFrame,dataPath:str)->None:
         os.makedirs(rawDataPath,exist_ok=True)
         trainData.to_csv(os.path.join(rawDataPath,'trainData.csv'),index=False)
         testData.to_csv(os.path.join(rawDataPath,'testData.csv'),index=False)
-        logger.debug('train and test data saved to ',rawDataPath)
+        logger.debug(f'train and test data saved to {rawDataPath}')
     except Exception as e:
         logger.error('unexpected error ',e)
         raise
