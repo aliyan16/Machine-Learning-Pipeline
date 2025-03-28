@@ -5,15 +5,15 @@ stages:
     - src/dataingestion.py
     # params:
     # - dataingestion.testsize
-    outs:
-    - data/raw
+    # outs:
+    # - data/raw
   DataPreprocessing:
     cmd: python src/DataPreprocessing.py
     deps:
     - data/raw
     - src/DataPreprocessing.py
-    outs:
-    - data/interim
+    # outs:
+    # - data/interim
   FeatureEngineering:
     cmd: python src/FeatureEngineering.py
     deps:
@@ -21,8 +21,8 @@ stages:
     - src/FeatureEngineering.py
     # params:
     # - FeatureEngineering.maxFeatures
-    outs:
-    - data/processed
+    # outs:
+    # - data/processed
   ModelBuilding:
     cmd: python src/ModelBuilding.py
     deps:
@@ -31,12 +31,12 @@ stages:
     # params:
     # - ModelBuilding.n_estimators
     # - ModelBuilding.random_state
-    outs:
-    - models/model.pkl
+    # outs:
+    # - models/model.pkl
   modelEvaluation:
     cmd: python src/modelEvaluation.py
     deps:
     - models/model.pkl
     - src/modelEvaluation.py
-    metrics:
-    - reports/metrics.json
+    # metrics:
+    # - reports/metrics.json

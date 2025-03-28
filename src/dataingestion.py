@@ -53,13 +53,13 @@ def preprocessData(df:pd.DataFrame)->pd.DataFrame:
 def saveData(trainData: pd.DataFrame, testData: pd.DataFrame, dataPath: str) -> None:
     '''save train and test data'''
     try:
-        rawDataPath = os.path.abspath(os.path.join(dataPath, 'raw'))
-        os.makedirs(rawDataPath, exist_ok=True)
-        trainData.to_csv(os.path.join(rawDataPath, 'trainData.csv'), index=False)
-        testData.to_csv(os.path.join(rawDataPath, 'testData.csv'), index=False)
+        rawDataPath = os.path.abspath(os.path.join(dataPath,'raw'))
+        os.makedirs(rawDataPath, exist_ok=True)  # Ensure directory exists
+        trainData.to_csv(os.path.join(rawDataPath,'trainData.csv'), index=False)
+        testData.to_csv(os.path.join(rawDataPath,'testData.csv'), index=False)
         logger.debug(f'train and test data saved to {rawDataPath}')
     except Exception as e:
-        logger.error('Unexpected error ', exc_info=True)  # Improved logging
+        logger.error('Unexpected error ', e)  # Improved logging
         raise
 
 
@@ -67,7 +67,7 @@ def saveData(trainData: pd.DataFrame, testData: pd.DataFrame, dataPath: str) -> 
 def main():
     
     try:
-        test_size=0.2
+        test_size=0.3
         dataPath='https://raw.githubusercontent.com/aliyan16/Datasets/refs/heads/main/spam.csv'
         df=loadData(dataUrl=dataPath)
         finalDf=preprocessData(df=df)
