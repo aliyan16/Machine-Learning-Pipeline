@@ -3,6 +3,8 @@ import os
 from sklearn.model_selection import train_test_split
 #builtin python lib logging
 import logging
+#importing yaml for params
+import yaml
 
 #logs name directory created
 logDirectory='logs'
@@ -28,6 +30,16 @@ fileHandler.setFormatter(formatter)
 logger.addHandler(consoleHandler)
 logger.addHandler(fileHandler)
 
+def loadParams(paramsPath:str)->dict:
+    """load parameters from a Yaml file"""
+    try:
+        with open(paramsPath,'r') as file:
+            params=yaml.safe_load(file)
+        logger.debug('parameters retrieved from %s',paramsPath)
+        return params
+    except Exception as e:
+        logger.error('Unexpected Error',e)
+        raise
 
 def loadData(dataUrl:str)->pd.DataFrame:
     '''load data from csv file'''
@@ -67,7 +79,9 @@ def saveData(trainData: pd.DataFrame, testData: pd.DataFrame, dataPath: str) -> 
 def main():
     
     try:
-        test_size=0.3
+        # test_size=0.2
+        params=loadParams(paramsPath='params.yaml')
+        test_size=params['dataingestion']['test_size']
         dataPath='https://raw.githubusercontent.com/aliyan16/Datasets/refs/heads/main/spam.csv'
         df=loadData(dataUrl=dataPath)
         finalDf=preprocessData(df=df)

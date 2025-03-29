@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import logging
 from sklearn.ensemble import RandomForestClassifier
+import yaml
 
 #logs name directory created
 logDirectory='logs'
@@ -29,6 +30,17 @@ fileHandler.setFormatter(formatter)
 logger.addHandler(consoleHandler)
 logger.addHandler(fileHandler)
 
+def loadParams(paramsPath:str)->dict:
+    """load parameters from a Yaml file"""
+    try:
+        with open(paramsPath,'r') as file:
+            params=yaml.safe_load(file)
+        logger.debug('parameters retrieved from %s',paramsPath)
+        return params
+    except Exception as e:
+        logger.error('Unexpected Error',e)
+        raise
+
 def loadData(filePath:str)-> pd.DataFrame:
     '''loads data from csv file'''
     try:
@@ -45,7 +57,7 @@ def trainModel(xtrain:np.ndarray,ytrain:np.ndarray,params:dict)->RandomForestCla
         if xtrain.shape[0]!=ytrain.shape[0]:
             raise ValueError('number of samples in xtrain and ytrain must be same')
         logger.debug('initializing randomForest model with params ',params)
-        clf=RandomForestClassifier(n_estimators=params['n_est'],random_state=params['randomState'])
+        clf=RandomForestClassifier(n_estimators=params['n_estimators'],random_state=params['random_state'])
         clf.fit(xtrain,ytrain)
         logger.debug('model training completed')
         return clf
@@ -65,7 +77,8 @@ def saveModel(model,filePath:str)->None:
 
 def main():
     try:
-        params={'n_est':50,'randomState':42}
+        params=loadParams(paramsPath='params.yaml')['modelBuilding']
+        # params={'n_est':50,'randomState':42}
         trainData=loadData('./data/processed/trainTfid.csv')
         xtrain=trainData.iloc[:,:-1].values
         ytrain=trainData.iloc[:,-1].values
