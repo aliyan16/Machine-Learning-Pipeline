@@ -9,13 +9,13 @@ stages:
       size: 3238
     params:
       params.yaml:
-        dataingestion.test_size: 0.2
+        dataingestion.test_size: 0.35
   DataPreprocessing:
     cmd: python src/DataPreprocessing.py
     deps:
     - path: data/raw
       hash: md5
-      md5: e994d2272890bb702aefdbe87e641e26.dir
+      md5: 50ea6229382a4b08c8c495b4aeb04024.dir
       size: 484846
       nfiles: 2
     - path: src/DataPreprocessing.py
@@ -27,8 +27,8 @@ stages:
     deps:
     - path: data/interim
       hash: md5
-      md5: b833e0254c128503e4b85fc514ad996d.dir
-      size: 691665
+      md5: 96b104ac43c62166780e06827a0f7f79.dir
+      size: 699020
       nfiles: 2
     - path: src/FeatureEngineering.py
       hash: md5
@@ -36,14 +36,14 @@ stages:
       size: 3280
     params:
       params.yaml:
-        featureEngineering.max_features: 50
+        featureEngineering.max_features: 35
   ModelBuilding:
     cmd: python src/ModelBuilding.py
     deps:
     - path: data/processed
       hash: md5
-      md5: bb0f9161e7a1d621904f68c90ad7aaa9.dir
-      size: 1405766
+      md5: 5d859c89d0dc379916eb5e5f9815e71a.dir
+      size: 1034444
       nfiles: 2
     - path: src/ModelBuilding.py
       hash: md5
@@ -51,16 +51,16 @@ stages:
       size: 3003
     params:
       params.yaml:
-        modelBuilding.n_estimators: 25
+        modelBuilding.n_estimators: 30
         modelBuilding.random_state: 2
   modelEvaluation:
     cmd: python src/modelEvaluation.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: 25222b8187dc3dfffa6cb7aff28ba8e1
-      size: 1417522
+      md5: 8ce1598f728e5a512f076bc54590232a
+      size: 1541857
     - path: src/modelEvaluation.py
       hash: md5
-      md5: a4c8ec6dcef1dbf6ab2271c82fd6a763
-      size: 2971
+      md5: 6c8252428d72343c0e3ba355c4cf2721
+      size: 3790
