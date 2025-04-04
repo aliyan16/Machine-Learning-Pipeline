@@ -30,5 +30,8 @@ jobs:
         pip install scikit-learn
         pip install nltk
         pip install dvclive
-        echo "Model Metrics"> report.md
-        cat metrices >> report.md
+
+    - name: Run model evaluation
+      run: 
+        python modelEvaluation.py
+        cat reports/metrics.json > report.md
