@@ -33,5 +33,5 @@ jobs:
 
     - name: Run model evaluation
       run: 
-        python modelEvaluation.py
+        python src/modelEvaluation.py
         cat reports/metrics.json > report.md
