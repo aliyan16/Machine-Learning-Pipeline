@@ -22,17 +22,11 @@ jobs:
         python-version: '3.11.1'
     
     - name: Install dependencies
-      run:
-        python -m pip install --upgrade
-        pip install yaml
-        pip install os
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml
         pip install numpy
         pip install pandas
-        pip install pickle
-        pip install json
-        pip install sklearn
-        pip install logging
-        pip install dvclive
+        pip install scikit-learn
         pip install nltk
-
-        
+        pip install dvclive
