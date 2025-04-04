@@ -9,7 +9,7 @@ stages:
       size: 3238
     params:
       params.yaml:
-        dataingestion.test_size: 0.35
+        dataingestion.test_size: 0.4
   DataPreprocessing:
     cmd: python src/DataPreprocessing.py
     deps:
@@ -36,7 +36,7 @@ stages:
       size: 3280
     params:
       params.yaml:
-        featureEngineering.max_features: 35
+        featureEngineering.max_features: 40
   ModelBuilding:
     cmd: python src/ModelBuilding.py
     deps:
@@ -51,15 +51,15 @@ stages:
       size: 3003
     params:
       params.yaml:
-        modelBuilding.n_estimators: 30
+        modelBuilding.n_estimators: 15
         modelBuilding.random_state: 2
   modelEvaluation:
     cmd: python src/modelEvaluation.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: 8ce1598f728e5a512f076bc54590232a
-      size: 1541857
+      md5: f51e416e3ef33cc65f81270dc99b93bd
+      size: 724780
     - path: src/modelEvaluation.py
       hash: md5
       md5: 6c8252428d72343c0e3ba355c4cf2721

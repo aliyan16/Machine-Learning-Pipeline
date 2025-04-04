@@ -1,2 +1,8 @@
 [cache]
     dir = cache
+[core]
+    remote = dvcstore
+['remote "dvcstore"']
+    url = s3://datapipelining/dvc-storage
+    endpointurl = https://s3.eu-north-1.amazonaws.com
+    profile = aliyan
