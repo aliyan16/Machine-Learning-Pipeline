@@ -30,3 +30,5 @@ jobs:
         pip install scikit-learn
         pip install nltk
         pip install dvclive
+        echo "Model Metrics"> report.md
+        cat metrices >> report.md
